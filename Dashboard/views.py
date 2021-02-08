@@ -56,7 +56,23 @@ def dashboardView(request):
             if i.User == UserMe:
                 i.delete()
 
-    return render(request, 'dashboard/student/dashHome.html')
+    PQFC = PerQuestionForCertificates.objects.filter(user = name)
+    attemptCount = 0
+    correctCount = 0
+    incorrectCount = 0
+    percentCount = '0%'
+    if PQFC.exists():
+        for i in PQFC:
+            attemptCount = attemptCount + 1
+            if i.Solved == True:
+                correctCount = correctCount + 1
+            else:
+                incorrectCount = incorrectCount + 1
+        percentCount = '{:.2%}'.format(correctCount / attemptCount)
+
+    params = {'atc': attemptCount, 'cc': correctCount, 'icc': incorrectCount, 'percent': percentCount}
+
+    return render(request, 'dashboard/student/dashHome.html', params)
 
 
 def blogs(request):
