@@ -1,4 +1,4 @@
-To DO:
+﻿To DO:
 - Certificate
 - Complete UI Re-Design
 
@@ -6,6 +6,7 @@ To DO:
 
 
 Done
+9. StatusBar Refinement
 1. UI
 2. Student Register, login, logout
 3. Teacher Register, login, logout
