@@ -8,7 +8,8 @@ class TeacherRegisterForm(UserCreationForm):
     date = forms.CharField()
     address = forms.CharField()
     phone = forms.CharField()
-    role = forms.ModelChoiceField(queryset=Group.objects.filter(id=1))
+    role = forms.ModelChoiceField(queryset=Group.objects.filter(name='Teacher'))
+    #role = forms.ModelChoiceField(queryset=Group.objects.filter(id=1))
 
 
 
