@@ -18,7 +18,7 @@ class UserRegisterForm(UserCreationForm):
     slcboard = forms.CharField()
     slcyear = forms.CharField()
     slcpercent = forms.CharField()
-    role = forms.ModelChoiceField(queryset=Group.objects.filter(id=2))
+    role = forms.ModelChoiceField(queryset=Group.objects.filter(name='Student'))
     class Meta:
         model = User
         fields = ('username', 'first_name', 'last_name', 'email', 'password1', 'password2', 'date', 'address', 'phone',

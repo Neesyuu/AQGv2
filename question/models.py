@@ -27,9 +27,9 @@ class AllQues(models.Model):
     lessTimeTaken = models.CharField(max_length=100, blank=True)
     modMark = models.IntegerField()
     modLevel = models.IntegerField()
-    teacherName = models.CharField(max_length=20, blank=True)
+    teacherName = models.CharField(max_length=100, blank=True)
     subjID = models.CharField(max_length=20, blank=True)
-    subjModel = models.CharField(max_length=50, blank=True)
+    subjModel = models.CharField(max_length=100, blank=True)
     timeStamp = models.DateTimeField(blank=True)
 
     def __str__(self):
@@ -47,7 +47,7 @@ class MathQues(models.Model):
     optB = models.CharField(max_length=255)
     optC = models.CharField(max_length=255)
     optD = models.CharField(max_length=255)
-    ans = models.CharField(max_length=10)
+    ans = models.CharField(max_length=255)
     mark = models.IntegerField()
     level = models.IntegerField()
     timeToSolve = models.CharField(max_length=100, blank=True)
@@ -55,9 +55,9 @@ class MathQues(models.Model):
     lessTimeTaken = models.CharField(max_length=100, blank=True)
     modMark = models.IntegerField()
     modLevel = models.IntegerField()
-    teacherName = models.CharField(max_length=20)
+    teacherName = models.CharField(max_length=100)
     mathID = models.CharField(max_length=20, blank=True)
-    mathModel = models.CharField(max_length=50, blank=True)
+    mathModel = models.CharField(max_length=100, blank=True)
     timeStamp = models.DateTimeField(blank=True)
 
     def __str__(self):
@@ -76,7 +76,7 @@ class PhysicsQues(models.Model):
     optB = models.CharField(max_length=255)
     optC = models.CharField(max_length=255)
     optD = models.CharField(max_length=255)
-    ans = models.CharField(max_length=10)
+    ans = models.CharField(max_length=255)
     mark = models.IntegerField()
     level = models.IntegerField()
     timeToSolve = models.CharField(max_length=100, blank=True)
@@ -84,9 +84,9 @@ class PhysicsQues(models.Model):
     lessTimeTaken = models.CharField(max_length=100, blank=True)
     modMark = models.IntegerField()
     modLevel = models.IntegerField()
-    teacherName = models.CharField(max_length=20)
+    teacherName = models.CharField(max_length=100)
     physicsID = models.CharField(max_length=20, blank=True)
-    physicsModel = models.CharField(max_length=50, blank=True)
+    physicsModel = models.CharField(max_length=100, blank=True)
     timeStamp = models.DateTimeField(blank=True)
 
     def __str__(self):
@@ -105,7 +105,7 @@ class ChemistryQues(models.Model):
     optB = models.CharField(max_length=255)
     optC = models.CharField(max_length=255)
     optD = models.CharField(max_length=255)
-    ans = models.CharField(max_length=10)
+    ans = models.CharField(max_length=255)
     mark = models.IntegerField()
     level = models.IntegerField()
     timeToSolve = models.CharField(max_length=100, blank=True)
@@ -113,9 +113,9 @@ class ChemistryQues(models.Model):
     lessTimeTaken = models.CharField(max_length=100, blank=True)
     modMark = models.IntegerField()
     modLevel = models.IntegerField()
-    teacherName = models.CharField(max_length=20)
+    teacherName = models.CharField(max_length=100)
     chemistryID = models.CharField(max_length=20, blank=True)
-    chemistryModel = models.CharField(max_length=50, blank=True)
+    chemistryModel = models.CharField(max_length=100, blank=True)
     timeStamp = models.DateTimeField(blank=True)
 
     def __str__(self):
@@ -134,7 +134,7 @@ class EnglishQues(models.Model):
     optB = models.CharField(max_length=255)
     optC = models.CharField(max_length=255)
     optD = models.CharField(max_length=255)
-    ans = models.CharField(max_length=10)
+    ans = models.CharField(max_length=255)
     mark = models.IntegerField()
     level = models.IntegerField()
     timeToSolve = models.CharField(max_length=100, blank=True)
@@ -142,9 +142,9 @@ class EnglishQues(models.Model):
     lessTimeTaken = models.CharField(max_length=100, blank=True)
     modMark = models.IntegerField()
     modLevel = models.IntegerField()
-    teacherName = models.CharField(max_length=20)
+    teacherName = models.CharField(max_length=100)
     englishID = models.CharField(max_length=20, blank=True)
-    englishModel = models.CharField(max_length=50, blank=True)
+    englishModel = models.CharField(max_length=100, blank=True)
     timeStamp = models.DateTimeField(blank=True)
 
     def __str__(self):

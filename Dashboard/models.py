@@ -28,7 +28,7 @@ class PerQuestionForCertificates(models.Model):
 
 
     def __str__(self):
-        return str(self.user) + ' | ' + str(self.QuesId) + ' | ' + str(self.Solved)
+        return str(self.user) + ' | ' + str(self.QuesId) + ' | ' + str(self.Solved) + ' | ' + str(self.SolvedTimes) + ' Times ' + ' | ' + str(self.TimeTaken) + 'Sec'
 
 
 class levelUpDec(models.Model):

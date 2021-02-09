@@ -58,7 +58,10 @@ def selsubforReview(request):
 def mathCount():
     allMathQues = MathQues.objects.all()
     count = allMathQues.count()
-    sno = allMathQues[count-1].pk
+    if count:
+        sno = allMathQues[count - 1].pk
+    else:
+        sno = -1
     # print(MathQues.objects.get(pk=5))
     return sno + 1
 
@@ -115,7 +118,10 @@ def mathSel(request):
 def physicsCount():
     allPhysicsQues = PhysicsQues.objects.all()
     count = allPhysicsQues.count()
-    sno = allPhysicsQues[count - 1].pk
+    if count:
+        sno = allPhysicsQues[count - 1].pk
+    else:
+        sno = -1
     return sno + 1
 
 
@@ -172,7 +178,10 @@ def physicsSel(request):
 def chemistryCount():
     allChemistryQues = ChemistryQues.objects.all()
     count = allChemistryQues.count()
-    sno = allChemistryQues[count-1].pk
+    if count:
+        sno = allChemistryQues[count - 1].pk
+    else:
+        sno = -1
     return sno + 1
 
 
@@ -227,7 +236,10 @@ def chemistrySel(request):
 def englishCount():
     allEnglishQues = EnglishQues.objects.all()
     count = allEnglishQues.count()
-    sno = allEnglishQues[count-1].pk
+    if count:
+        sno = allEnglishQues[count - 1].pk
+    else:
+        sno = -1
     return sno + 1
 
 
