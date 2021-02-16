@@ -2,16 +2,17 @@ from django.shortcuts import render, redirect, HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
 import requests
+import os
 
 from django.contrib.auth.models import User
 from aqg.decorators import student_only
 from Register.models import UserDetail
 import re, random
 from django.core.paginator import Paginator
-from Dashboard.models import PerStudentData, levelUpDec, PerStudentCache, PerQuestionForCertificates, Bookmarked
+from Dashboard.models import PerStudentData, levelUpDec, PerStudentCache, PerQuestionForCertificates, Bookmarked, GotCertificate
 from question.models import Subject, AllQues, MathQues, PhysicsQues, EnglishQues, ChemistryQues
 from django.http import JsonResponse
-
+from certificate import certificateLoad
 
 # Create your views here.
 
@@ -43,12 +44,16 @@ def dashboardView(request):
     perAns = []
     timekeeper = []
     name = request.user
+    pkey = request.user.pk
 
     glevel = request.user.userdetail.glevel
     print('Name : ')
     print(name)
     print(f'Level : '+ glevel)
     levelUpDecide(name, glevel)
+    doIHave = myCertificate(name, glevel, pkey)
+    print('DoIHave')
+    print(doIHave)
     UserMe = request.user
     PSC = PerStudentCache.objects.all()
     if PSC.exists():
@@ -70,7 +75,7 @@ def dashboardView(request):
                 incorrectCount = incorrectCount + 1
         percentCount = '{:.2%}'.format(correctCount / attemptCount)
 
-    params = {'atc': attemptCount, 'cc': correctCount, 'icc': incorrectCount, 'percent': percentCount}
+    params = {'atc': attemptCount, 'cc': correctCount, 'icc': incorrectCount, 'percent': percentCount, 'doIHave': doIHave}
 
     return render(request, 'dashboard/student/dashHome.html', params)
 
@@ -935,35 +940,32 @@ def levelUpDecide(UserId, levelId):
         print(f'You are not ready. '+ str(levelId))
 
 
-
-def reCalculate(mark, time):
-    nTime = round(time)
-    if mark == 2:
-        if nTime > 2:
-            return 3
-        elif nTime > 1:
-            return 2
+def myCertificate(name, level, pkey):
+    fullname = str(name.first_name) + ' ' + str(name.last_name)
+    if certificateLoad.doIHaveCertificate(pkey, fullname):
+        print('You dont have Certificate -----------------------------------------')
+        if int(level) == 5:
+            certificateLoad.loadCertificate(name, fullname, pkey)
+            return True
         else:
-            return 1
+            fullname = str(name.first_name) + ' ' + str(name.last_name)
+            #certificateLoad.loadCertificate(name, fullname, pkey)
+            print(f'Nope No Certificate ' + str(fullname))
+            return False
     else:
-        if time > 1:
-            return 3
-        elif nTime > 0.5:
-            return 2
-        else:
-            return 1
+        #certificateLoad.loadCertificate(name, fullname, pkey)
+        print('You have Certificate ----------------------------------------------')
+        return True
 
 
-def reLeveling(mySub, id, level):
-    AllQues.objects.filter(pk=id).update(level=level)
-    if mySub == 'P':
-        PhysicsQues.objects.filter(intQuesID=id).update(level=level)
-    elif mySub == 'C':
-        ChemistryQues.objects.filter(intQuesID=id).update(level=level)
-    elif mySub == 'M':
-        MathQues.objects.filter(intQuesID=id).update(level=level)
-    elif mySub == 'E':
-        EnglishQues.objects.filter(intQuesID=id).update(level=level)
+def myAchievement(request):
+    name = request.user.first_name + ' ' + request.user.last_name
+    print(name)
+    cerf = GotCertificate.objects.filter(User = request.user)
+    print(cerf)
+    for i in cerf:
+        print(i.image)
 
+    params = {'Name': name, 'cerf':cerf}
 
-
+    return render(request, 'dashboard/student/Certificate/iGotCertificate.html', params)

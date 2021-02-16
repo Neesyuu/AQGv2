@@ -13,7 +13,7 @@ def mathCount():
     return count+1
 
 
-
+#used in ExpertV1
 def reCalculate(mark, time):
     nTime = round(time)
     if mark == 2:
@@ -32,6 +32,7 @@ def reCalculate(mark, time):
             return 1
 
 
+#used in ExpertV1
 def reLeveling(mySub, id, level):
     AllQues.objects.filter(pk=id).update(level=level)
     if mySub == 'P':
@@ -44,6 +45,7 @@ def reLeveling(mySub, id, level):
         EnglishQues.objects.filter(intQuesID=id).update(level=level)
 
 
+#used in direct website
 def expertV1(request):
     print('Expert v1.1')
     data1 = PerQuestionForCertificates.objects.all()

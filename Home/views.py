@@ -14,6 +14,8 @@ from nltk.tokenize import word_tokenize
 import string
 
 
+
+
 # Create your views here.
 
 def handleSHome(request):
@@ -56,10 +58,10 @@ def handleSLogout(request):
     return redirect('indexView')
 
 
-def loadLive(request):
-    global intCosData
-    intCosData = 0
-    return render(request, 'test/testLive.html')
+# def loadLive(request):        #for js Live test
+#     global intCosData
+#     intCosData = 0
+#     return render(request, 'test/testLive.html')
 
 data1 = ''
 @csrf_exempt
@@ -100,6 +102,7 @@ def testWriteCache(request):
     return JsonResponse({'mark': mark, 'level': level})
 
 
+#used in testWriteCache()
 def cosineSim(d1, d2):
     # print(d1)
     # print(d2)
@@ -111,7 +114,7 @@ def cosineSim(d1, d2):
     return cosineSimulation
 
 
-
+#used in cosineSim()
 def similarityMeasure(d1, d2):
     x = d1.lower()
     y = d2.lower()
@@ -139,7 +142,11 @@ def similarityMeasure(d1, d2):
     return cosine
 
 
+#used in cosineSim()
 def remove_punct(txt):
     txt_nopunt="".join([c for c in txt if c not in string.punctuation])
     return txt_nopunt
+
+
+
 

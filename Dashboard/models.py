@@ -5,13 +5,13 @@ from django.contrib.auth.models import User
 
 class PerStudentData(models.Model):
     User = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
-    Mark = models.CharField(max_length=2)
-    Level = models.CharField(max_length=20)
-    NOQ = models.CharField(max_length=50, null=True)
-    Physics = models.CharField(max_length=5, null=True)
-    Chemistry = models.CharField(max_length=5, null=True)
-    Math = models.CharField(max_length=5, null=True)
-    English = models.CharField(max_length=5, null=True)
+    Mark = models.CharField(max_length=255)
+    Level = models.CharField(max_length=255)
+    NOQ = models.CharField(max_length=255, null=True)
+    Physics = models.CharField(max_length=235, null=True)
+    Chemistry = models.CharField(max_length=255, null=True)
+    Math = models.CharField(max_length=255, null=True)
+    English = models.CharField(max_length=255, null=True)
 
     def __str__(self):
         return str(self.User)
@@ -73,3 +73,14 @@ class Bookmarked(models.Model):
 
     def __str__(self):
         return str(self.User) + ' | ' + str(self.IntQuesID) + ' | ' + str(self.Question)
+
+
+class GotCertificate(models.Model):
+    sno = models.AutoField(primary_key=True)
+    User = models.ForeignKey(User, on_delete=models.CASCADE)
+    Fullname = models.CharField(max_length=255)
+    image = models.ImageField(upload_to='certificate/', null=True)
+    Date = models.CharField(max_length=255)
+
+    def __str__(self):
+        return str(self.User) + ' on ' + str(self.Date)

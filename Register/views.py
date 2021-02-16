@@ -39,10 +39,6 @@ def registerView(request):
         else:
             messages.error(request, 'Invalid: try again')
 
-
-
-
-
     else:
         form = UserRegisterForm()
 

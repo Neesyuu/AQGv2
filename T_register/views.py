@@ -33,8 +33,6 @@ def tRegisterView(request):
         else:
             messages.error(request, 'Invalid: try again')
 
-
-
     else:
         form = TeacherRegisterForm()
     params = {
