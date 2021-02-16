@@ -8,6 +8,19 @@
     <h1 class="display-6">You are Level : {{ request.user.userdetail.glevel }}</h1>
 </div>
 
+{% if doIHave %}
+<div class="jumbotronMine"  style="background-color: #89f189;">
+    <h1 class="display-5">Congratulation {{ request.user }} !!</h1>
+    <hr class="my-4">
+    <p class="lead">You have received your certificate.</p>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <a class="btn btn-success btn-lg" href="achievement" role="button" style="float:right">View My Certificate</a>
+    </form>
+    <br>
+    <br>
+</div>
+{% else %}
 <div class="jumbotronMine">
     <h1 class="display-5">Level Up and get Certificate.</h1>
     <hr class="my-4">
@@ -16,8 +29,9 @@
     <br>
     <br>
 </div>
+{% endif %}
 
-<div class="jumbotronMine">
+<div class="jumbotronMine" style="background-color: #bcdef9;">
     <h1 class="display-4">Overall Score!</h1>
     <hr class="my-4">
 
@@ -77,4 +91,6 @@
 <br>
 <br>
 <br>
+
+
 {% endblock sub_body %}

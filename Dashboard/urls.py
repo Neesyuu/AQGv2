@@ -25,4 +25,5 @@ urlpatterns = [
     path('book', views.book, name='BookmarkCache'),
     path('delbook', views.delbook, name='Delete_Bookmark'),
     path('bookmark', views.bookmark, name='Bookmark'),
+    path('achievement', views.myAchievement, name='myAchievement'),
 ]

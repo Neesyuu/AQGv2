@@ -1,11 +1,12 @@
 ﻿To DO:
-- Certificate
 - Complete UI Re-Design
+- Documents
 
 
 
 
 Done
+- Certificate
 9. StatusBar Refinement v2
 1. UI
 2. Student Register, login, logout

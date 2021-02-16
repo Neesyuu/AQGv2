@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+{% block title %} Dashboard {% endblock title %}
+
+{% block activeDash %} active {% endblock activeDash %}
+
+{% block logactive %} disabled {% endblock logactive %}
+
+{% block position %} fixed {% endblock position %}
+
+
+{% block body %}
+<div class="container my-5">
+    <p class="lead">Achievement > Course Certificate</p>
+    <h1 class="display-5">Engineering Entrance Course</h1>
+    <div class="container my-5">
+        {% for i in cerf %}
+        <div class="row">
+
+            <div class="col" style="background-color: #d6edf6">
+                <div class="container my-5">
+                    <h1 class="displayMe-6">Completed by </h1>
+                    <h1 class="display-5" style="font-weight: 400;">{{ Name }}</h1>
+
+                    <h1 class="displayMe-7">{{ i.Date }}</h1>
+                    <br>
+                    <p class="lead">{{ Name }}'s account is verified. AQG certifies their successful completion of
+                        Engineering Entrance Course</p>
+                </div>
+            </div>
+            <div class="col">
+
+                <img src="{{ i.image.url }}" style="width:584px;height:413px;">
+
+            </div>
+
+        </div>
+        <br><br>
+        <div class="d-grid gap-2 col-3 mx-auto">
+            <a href="{{ i.image.url }}" class="btn btn-outline-primary">Download Certificate</a>
+        </div>
+        <br>
+        <hr class="my-4">
+        {% endfor %}
+    </div>
+</div>
+
+<style type="text/css">
+      .displayMe-6{
+        font-size: calc(1.425rem + 2.1vw);
+        font-weight: 400;
+        line-height: 1.2;
+        font-size: 25px;
+      }
+      .displayMe-7{
+        font-size: calc(1.425rem + 2.1vw);
+        font-weight: 400;
+        line-height: 1.2;
+        font-size: 20px;
+      }
+
+</style>
+
+{% endblock body %}

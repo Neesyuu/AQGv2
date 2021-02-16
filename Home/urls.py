@@ -10,7 +10,7 @@ urlpatterns = [
     path('profile/', include('Profile_info.urls'), name='ProfileInfo'),
     path('login/', views.handleSLogin, name='login'),
     path('logout/', views.handleSLogout, name='logout'),
-    path('loadLive/', views.loadLive, name='loadLive'),
+    #path('loadLive/', views.loadLive, name='loadLive'),
     path('testLoadCache/', views.testLoadCache, name='testLoadCache'),
     path('testWriteCache/', views.testWriteCache, name='testWriteCache'),
 
