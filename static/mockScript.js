@@ -13,7 +13,7 @@ function initall(){
 
 var ID = 0;
 var seconds = 45;
-var minute = 58;
+var minute = 44;
 var hour = 1;
 function printMsg(){
 

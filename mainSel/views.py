@@ -17,3 +17,4 @@ def indexNView(request):
 #             return render(request, 'register/register.html')
 #         else:
 #             return render(request, 'register/register.html')
+

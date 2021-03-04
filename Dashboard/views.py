@@ -555,6 +555,7 @@ def save1ans(request):
     print(data)
     print(timerr)
 
+
     PerStudentCache.objects.filter(Did=int(ques_tag)-1).update(UserAns=data, TimeTaken=timerr)
 
     perAns.append(data)
@@ -595,6 +596,7 @@ def CerfTest(request):
 
         for i in DataToShow1:
             mainAns.append(i.ans)
+        print('mainAns ---------------------')
         print(mainAns)
         l=0
         for i in DataToShow1:
@@ -621,16 +623,29 @@ def CerfResult(request):
     global perAns, mainAns, timekeeper
     score = 0
     userMe = request.user
-    DataBase = PerStudentCache.objects.all()
+    DataBase = PerStudentCache.objects.filter(User=userMe)
+    print('dataBAse ---------------------')
+    print(DataBase)
     byNum = len(mainAns)
     print(byNum)
 
     #no = 0
     for d in DataBase:
+        print(userMe)
+        print(userMe.id)
+        print('UserAns')
+        print(d.UserAns)
+        print('Ans')
+        print(d.ans)
+        print('True or False -----------------------------')
         if (d.UserAns == d.ans):
-            PerStudentCache.objects.filter(User=userMe.id).update(Solved=True)
+            print('True')
+            PerStudentCache.objects.filter(User=userMe.id, IntQuesID=d.IntQuesID).update(Solved=True)
             score += 1
             #no = no + 1
+        else:
+            PerStudentCache.objects.filter(User=userMe.id, IntQuesID=d.IntQuesID).update(Solved=False)
+            print('False')
 
     # for i in DataBase:
     #     print(i.Did)
@@ -698,7 +713,7 @@ def callMeForQues(level):
 
     if glevel == 1:
         print('level1')
-        PhyQuesCall(1,1,11)
+        PhyQuesCall(1,1,5)
         # PhyQuesCall(1,2,2)
         # PhyQuesCall(2,1,16)
 
@@ -773,21 +788,22 @@ def callMeForQues(level):
         print(len(DataToShow2))
 
     elif glevel == 4:
-        PhyQuesCall(1, 3, 9)
-        PhyQuesCall(2, 2, 4)
-        PhyQuesCall(2, 3, 19)
+        # PhyQuesCall(1, 3, 9)
+        # PhyQuesCall(2, 2, 4)
+        #PhyQuesCall(2, 3, 19)
+        PhyQuesCall(2, 3, 7)
 
-        CheQuesCall(1, 3, 10)
-        CheQuesCall(2, 2, 2)
-        CheQuesCall(2, 3, 5)
-
-        MathQuesCall(1, 3, 9)
-        MathQuesCall(2, 2, 4)
-        MathQuesCall(2, 3, 19)
-
-        EngQuesCall(1, 3, 12)
-        EngQuesCall(2, 2, 2)
-        EngQuesCall(2, 3, 5)
+        # CheQuesCall(1, 3, 10)
+        # CheQuesCall(2, 2, 2)
+        # CheQuesCall(2, 3, 5)
+        #
+        # MathQuesCall(1, 3, 9)
+        # MathQuesCall(2, 2, 4)
+        # MathQuesCall(2, 3, 19)
+        #
+        # EngQuesCall(1, 3, 12)
+        # EngQuesCall(2, 2, 2)
+        # EngQuesCall(2, 3, 5)
 
         print('DataToShow1')
         print(len(DataToShow1))
@@ -799,6 +815,14 @@ def callMeForQues(level):
     else:
         pass
 
+def randomm(data, listti , mkl, DataToShowz):
+    n = random.randrange(data)
+    if n not in listti:
+        listti.append(n)
+        y = mkl[n]
+        DataToShowz.append(y)
+    else:
+        randomm(data, listti , mkl, DataToShowz)
 
 def PhyQuesCall(mark, level, num):
     global DataToShow1, DataToShow2
@@ -816,15 +840,30 @@ def PhyQuesCall(mark, level, num):
     cp1 = len(phymkl)
 
     if m == 1:
+        listti = []
         for i in range(nn):
             n = random.randrange(cp1)
-            y = phymkl[n]
-            DataToShow1.append(y)
+            if n not in listti:
+                listti.append(n)
+                y = phymkl[n]
+                DataToShow1.append(y)
+            else:
+                randomm(cp1, listti , phymkl, DataToShow1)
+
     elif m == 2:
+        # for i in range(nn):
+        #     n = random.randrange(cp1)
+        #     y = phymkl[n]
+        #     DataToShow2.append(y)
+        listti = []
         for i in range(nn):
             n = random.randrange(cp1)
-            y = phymkl[n]
-            DataToShow2.append(y)
+            if n not in listti:
+                listti.append(n)
+                y = phymkl[n]
+                DataToShow2.append(y)
+            else:
+                randomm(cp1, listti, phymkl, DataToShow2)
 
 
 def CheQuesCall(mark, level, num):

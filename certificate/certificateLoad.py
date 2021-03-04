@@ -30,6 +30,7 @@ def loadCertificate(username, Name, pkey):
     flag = True
 
     date = datetime.today().strftime('%Y-%m-%d')
+
     name_to_print = Name
     date_to_print = date  # Change this date as per requirement
 

@@ -12,6 +12,7 @@ from django.contrib.auth.models import User
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
 import string
+from Dashboard.views import levelUpDecide
 
 
 
@@ -22,6 +23,12 @@ def handleSHome(request):
     return render(request, 'home/index.html')
 
 def indexView(request):
+    print(request.user.is_authenticated)
+
+    if request.user.is_authenticated:
+        name = request.user
+        glevel = request.user.userdetail.glevel
+        levelUpDecide(name, glevel)
     return render(request, 'home/index.html')
 
 def csView(request):

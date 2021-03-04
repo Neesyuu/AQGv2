@@ -453,6 +453,9 @@ def deleteQues(request, id):
     return redirect('/teacher/dashboard/selsubReview/')
 
 
+# ----------------------- To Get data for cosine similarity ----------------------------
+
+# ----------------------------- 1. To Get data ----------------------------
 data1 = ''
 @csrf_exempt
 def testLoadCache(request):
@@ -460,6 +463,8 @@ def testLoadCache(request):
     lol = request.POST.get('ans')
     data1 = lol
     return HttpResponse('Good Job')
+
+# ----------------------- 2. To send Question mark and level -----------------
 
 intCosData = 0
 
@@ -472,7 +477,7 @@ def testWriteCache(request):
     QuesData = AllQues.objects.all()
     for i in QuesData:
         cosData = cosineSim(i.Question, data1)
-        if cosData != 0.0:
+        if cosData != 0:
             if cosData >= intCosData:
                 intCosData = cosData
                 mark = i.mark
@@ -496,7 +501,6 @@ def cosineSim(d1, d2):
     # print('cosineSimulation')
     # print(cosineSimulation)
     return cosineSimulation
-
 
 
 def similarityMeasure(d1, d2):
